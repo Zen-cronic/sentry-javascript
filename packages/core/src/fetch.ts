@@ -65,7 +65,7 @@ export function instrumentFetchRequest(
   const scope = getCurrentScope();
   const client = getClient();
 
-  const { method, url, body } = handlerData.fetchData;
+  const { method, url } = handlerData.fetchData;
 
   const fullUrl = getFullURL(url);
   const host = fullUrl ? parseUrl(fullUrl).host : undefined;

@@ -28,7 +28,6 @@ import {
   browserPerformanceTimeOrigin,
   dynamicSamplingContextToSentryBaggageHeader,
   generateSentryTraceHeader,
-  getGraphQLRequestPayload,
   parseUrl,
   stringMatchesSomePattern,
 } from '@sentry/utils';
