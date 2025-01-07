@@ -17,7 +17,6 @@ import type {
   HandlerDataHistory,
   HandlerDataXhr,
   IntegrationFn,
-  SeverityLevel,
   XhrBreadcrumbData,
   XhrBreadcrumbHint,
 } from '@sentry/types';
@@ -27,7 +26,6 @@ import {
   getBreadcrumbLogLevelFromHttpStatusCode,
   getComponentName,
   getEventDescription,
-  getGraphQLRequestPayload,
   htmlTreeAsString,
   logger,
   parseUrl,
@@ -296,9 +294,9 @@ function _getFetchBreadcrumbHandler(client: Client): (handlerData: HandlerDataFe
       const breadcrumb = {
         category: 'fetch',
         data,
-        level: 'error' as SeverityLevel,
+        level: 'error',
         type: 'http',
-      };
+      } satisfies Breadcrumb;
 
       client.emit('beforeOutgoingRequestBreadcrumb', breadcrumb, handlerData);
 

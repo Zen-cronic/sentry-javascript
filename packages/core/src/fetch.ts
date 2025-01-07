@@ -3,7 +3,6 @@ import {
   BAGGAGE_HEADER_NAME,
   dynamicSamplingContextToSentryBaggageHeader,
   generateSentryTraceHeader,
-  getGraphQLRequestPayload,
   isInstanceOf,
   parseUrl,
 } from '@sentry/utils';
@@ -114,7 +113,7 @@ export function instrumentFetchRequest(
   }
 
   if (client) {
-    client.emit('outgoingRequestSpanStart', span, { body: getGraphQLRequestPayload(body as string) });
+    client.emit('beforeOutgoingRequestSpan', span, handlerData);
   }
 
   return span;
