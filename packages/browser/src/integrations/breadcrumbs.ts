@@ -257,7 +257,7 @@ function _getXhrBreadcrumbHandler(client: Client): (handlerData: HandlerDataXhr)
       level: getBreadcrumbLogLevelFromHttpStatusCode(status_code),
     };
 
-    client.emit('outgoingRequestBreadcrumbStart', breadcrumb, { body: getGraphQLRequestPayload(body as string) });
+    client.emit('beforeOutgoingRequestBreadcrumb', breadcrumb, handlerData);
 
     addBreadcrumb(breadcrumb, hint);
   };
@@ -300,9 +300,7 @@ function _getFetchBreadcrumbHandler(client: Client): (handlerData: HandlerDataFe
         type: 'http',
       };
 
-      client.emit('outgoingRequestBreadcrumbStart', breadcrumb, {
-        body: getGraphQLRequestPayload(handlerData.fetchData.body as string),
-      });
+      client.emit('beforeOutgoingRequestBreadcrumb', breadcrumb, handlerData);
 
       addBreadcrumb(breadcrumb, hint);
     } else {
@@ -325,9 +323,7 @@ function _getFetchBreadcrumbHandler(client: Client): (handlerData: HandlerDataFe
         level: getBreadcrumbLogLevelFromHttpStatusCode(data.status_code),
       };
 
-      client.emit('outgoingRequestBreadcrumbStart', breadcrumb, {
-        body: getGraphQLRequestPayload(handlerData.fetchData.body as string),
-      });
+      client.emit('beforeOutgoingRequestBreadcrumb', breadcrumb, handlerData);
 
       addBreadcrumb(breadcrumb, hint);
     }
